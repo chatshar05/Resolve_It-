@@ -12,10 +12,15 @@ const registerUser = async (req, res) => {
     const { name, email, password, role, category } = req.body;
 
     // check image
-    if (!req.file) {
-      return res.status(400).json({
-        message: "Profile image is required",
+    let imageUrl = null;
+
+    if (req.file) {
+      const uploadResponse = await imagekit.upload({
+        file: req.file.buffer,
+        fileName: Date.now() + ".jpg",
       });
+
+      imageUrl = uploadResponse.url;
     }
 
     // check if user exists
