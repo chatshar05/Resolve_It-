@@ -7,7 +7,6 @@ const complaintRoutes = require('./routes/complaint.routes');
 const userRoutes = require("./routes/user.routes");
 
 const aiRoutes = require("./routes/ai.routes");
-const { default: api } = require('../../Frontend/src/services/api');
 
 const app = express();     // creeating express framework instance , now this app object will control the entire server 
 
