@@ -1,38 +1,40 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const path = require("path");
 
 const authRoutes = require('./routes/auth.routes');
 const complaintRoutes = require('./routes/complaint.routes');
 const userRoutes = require("./routes/user.routes");
-
 const aiRoutes = require("./routes/ai.routes");
 
-const app = express();     // creeating express framework instance , now this app object will control the entire server 
+const app = express();
 
-const path = require("path");
-
+// Serve uploaded files
 app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
+// CORS configuration (allow frontend requests)
 app.use(cors({
-  origin: ["http://localhost:5173", "https://resolve-it.vercel.app"],
+  origin: [
+    "http://localhost:5173",
+    "https://resolve-it.vercel.app"
+  ],
   credentials: true
 }));
 
-
-app.use(express.json());   // middleware used for raw data , but other case like form-data we use multer as this 
-// is unsupported teher .... with it we can access like re.body.email
+// Middlewares
+app.use(express.json());
 app.use(cookieParser());
 
+// Routes
+app.use('/api/auth', authRoutes);
+app.use('/api/complaints', complaintRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/ai', aiRoutes);
 
-app.use('/api/auth',authRoutes);          //conmect auth routes to the server 
-app.use('/api/complaints',complaintRoutes);   
-app.use("/api/users", userRoutes);
-
-
-
-// ai api
-
-app.use("/api/ai", aiRoutes);
+// Health check route (for testing backend)
+app.get("/", (req, res) => {
+  res.send("ResolveIt backend running 🚀");
+});
 
 module.exports = app;
