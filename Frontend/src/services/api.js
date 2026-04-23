@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:3000/api",
+  baseURL: "https://resolveit-production-d5f6.up.railway.app/api",
   withCredentials: true
 });
 
