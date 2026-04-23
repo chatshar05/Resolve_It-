@@ -15,11 +15,7 @@ app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
 // CORS configuration (allow frontend requests)
 app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "https://resolve-it.vercel.app",
-    "https://resolve-it-git-main-chaitanya.vercel.app"
-  ],
+  origin: true,
   credentials: true
 }));
 
