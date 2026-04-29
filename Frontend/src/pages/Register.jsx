@@ -15,8 +15,8 @@ const Register = () => {
   const [image, setImage] = useState(null);
   const [cameraOpen, setCameraOpen] = useState(false);
 
-  const videoRef = useRef(null);
-  const canvasRef = useRef(null);
+  const videoRef = useRef(null);             // These reference DOM elements.   used to access video element and canvas element
+  const canvasRef = useRef(null);             //Because capturing images requires direct DOM access.
 
   const handleChange = (e) => {
 
